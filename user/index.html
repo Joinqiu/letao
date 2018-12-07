@@ -45,7 +45,7 @@
                 </li>
             </ul>
             <div class="p20">
-                <a href="login.html" class="mui-btn btn_outLogin">退出登录</a>
+                <button class="mui-btn btn_outLogin">退出登录</button>
             </div>
         </div>
         <footer class="cz_tabs">
@@ -61,13 +61,24 @@
         // 1. 找后端要一个接口（查看文档）
         // 2. 发送一个请求
         $.ajax({
-            // url: 'http://localhost:3000/user/queryUserMessage',
-            url: '/api/user/queryUserMessage',
-            type: 'get',
-            success: function(info) {
-                // 3. 获取响应结果
-                console.log(info);
-            }
+                // url: 'http://localhost:3000/user/queryUserMessage',
+                url: '/api/user/queryUserMessage',
+                type: 'get',
+                success: function(info) {
+                    // 3. 获取响应结果
+                    console.log(info);
+                }
+            })
+            // 退出登录
+            // 1.当用户点击时发送一个请求
+            // 2.等待服务器响应
+        $('.btn_outLogin').on('click', function() {
+            $.ajax({
+                url: '/api/user/logout',
+                success: function(info) {
+                    if (info.success) location.href = "/";
+                }
+            })
         })
     </script>
 </body>

@@ -64,12 +64,8 @@
                     // 3. 得到服务端的响应结果
                     console.log(info);
                     // 4. 处理登录后的逻辑
-                    if (info.error == 403) {
-                        alert('无效输入');
-                    } else {
-
-                        location.href = '/';
-                    }
+                    if (info.success) return location.href = '/';
+                    alert(info.message);
                 }
             })
 
