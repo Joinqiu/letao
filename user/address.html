@@ -43,7 +43,7 @@
             <div class="mui-slider-right mui-disabled">
                 <a class="mui-btn mui-btn-red del" data="{{val.id}}">删除</a>
             </div>
-            <a href="/user/editAddress.html" class="mui-navigate-right mui-slider-handle">
+            <a href="/user/editAddress.html" class="mui-navigate-right mui-slider-handle edit" data="{{val.id}}">
                 <div class="delivery">邮编：<span>{{val.postCode}}</span>&nbsp;收货人：<span>{{val.recipients}}</span></div>
                 <div class="address">{{val.address}}{{val.addressDetail}}</div>
             </a>
@@ -60,7 +60,8 @@
             url: '/api/address/queryAddress',
             type: 'get',
             success: function(info) {
-                if (info.error) return location.href = '/user/login.html';
+                console.log(info);
+                // if (info.error) return location.href = '/user/login.html';
                 var json = {
                     list: info
                 };
@@ -85,6 +86,20 @@
                             $(this).remove();
                         })
                     }
+                }
+            })
+        });
+        // 点击跳转编辑页前，传id给服务器
+        $('.edit').on('click', function() {
+            var id = $(this).attr('data');
+            $.ajax({
+                url: '/api/address/editAddress',
+                data: {
+                    id: id
+                },
+                type: 'post',
+                success: function(info) {
+
                 }
             })
         })

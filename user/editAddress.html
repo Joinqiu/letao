@@ -54,7 +54,7 @@
         $('form').on('submit', function() {
             var data = $(this).serialize();
             $.ajax({
-                url: '/api/address/addAddress',
+                url: '/api/address/editAddress',
                 data: data,
                 type: 'post',
                 success: function(info) {
