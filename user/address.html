@@ -61,7 +61,7 @@
             type: 'get',
             success: function(info) {
                 console.log(info);
-                // if (info.error) return location.href = '/user/login.html';
+                if (info.error) return location.href = '/user/login.html?url=' + location.href;
                 var json = {
                     list: info
                 };
