@@ -118,6 +118,9 @@
                 info.discount = (info.price / info.oldPrice * 10).toFixed(1);
                 var html = template('tpl', info);
                 $('#t').html(html);
+                mui('.mui-slider').slider({
+                    interval: 3000 //自动轮播周期，若为0则不自动播放，默认为0；
+                });
             }
         });
 
@@ -182,9 +185,7 @@
             input.val(--n);
         })
         mui(function() {
-            mui('.mui-slider').slider({
-                interval: 3000 //自动轮播周期，若为0则不自动播放，默认为0；
-            });
+
             mui('.mui-scroll-wrapper').scroll();
 
         });
