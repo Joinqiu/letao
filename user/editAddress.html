@@ -22,22 +22,8 @@
             <span class="title">收货地址管理</span>
         </header>
         <div class="cz_container">
-            <form action="">
-                <div class="form_box">
-                    <div class="mui-input-row">
-                        <input name="recipients" type="text" placeholder="收货人">
-                    </div>
-                    <div class="mui-input-row">
-                        <input name="postcode" type="text" placeholder="邮编">
-                    </div>
-                    <div class="mui-input-row">
-                        <input name="address" type="text" placeholder="省市县">
-                    </div>
-                    <div class="mui-input-row">
-                        <textarea name="addressDetail" id="textarea" rows="5" placeholder="多行文本框"></textarea>
-                    </div>
-                    <input type="submit" class="mui-btn mui-btn-primary btn_login" value="确认">
-                </div>
+            <form action="" id="t">
+
             </form>
         </div>
         <footer class="cz_tabs">
@@ -47,10 +33,47 @@
             <a class="tab_user fa fa-user" href="../user/index.html"><span>会员中心</span></a>
         </footer>
     </div>
+    <script type="text/html" id="tpl">
+        <div class="form_box">
+            <div class="mui-input-row">
+                <input name="recipients" type="text" value="{{list.recipients}}">
+            </div>
+            <div class="mui-input-row">
+                <input name="postcode" type="text" value="{{list.postCode}}">
+            </div>
+            <div class="mui-input-row">
+                <input name="address" type="text" value="{{list.address}}">
+            </div>
+            <div class="mui-input-row">
+                <textarea name="addressDetail" id="textarea" rows="5" placeholder="{{list.addressDetail}}"></textarea>
+            </div>
+            <input type="submit" class="mui-btn mui-btn-primary btn_login" value="确认">
+        </div>
+    </script>
+    <script src="/js/template-web.js"></script>
     <script src="../js/jquery.min.js"></script>
     <script src="../res/mui/js/mui.min.js"></script>
     <script>
-        // 修改地址
+        var search = location.search.slice(1);
+        search = search.split('=');
+        var id = search[1];
+        $.ajax({
+                url: '/api/address/query2Address',
+                data: {
+                    id: id
+                },
+                type: 'get',
+                success: function(info) {
+                    console.log(info);
+                    var json = {
+                        list: info[0]
+                    }
+                    console.log(json);
+                    var html = template('tpl', json);
+                    $('#t').html(html);
+                }
+            })
+            // 修改地址
         $('form').on('submit', function() {
             var data = $(this).serialize();
             $.ajax({

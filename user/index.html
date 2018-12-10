@@ -67,6 +67,7 @@
                 success: function(info) {
                     // 3. 获取响应结果
                     console.log(info);
+                    if (info.error) return location.href = "/user/login.html?url=" + location.href;
                 }
             })
             // 退出登录
